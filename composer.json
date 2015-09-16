@@ -1,0 +1,45 @@
+{
+  "name": "mishal/iless-plugin-autoprefix",
+  "type": "library",
+  "description": "ILess plugin autoprefix",
+  "keywords": [
+    "less",
+    "lesscss",
+    "css",
+    "parser",
+    "compiler",
+    "less.js",
+    "plugin",
+    "autoprefix"
+  ],
+  "license": "MIT",
+  "homepage": "http://github.com/mishal/iless-plugin-autoprefix",
+  "authors": [
+    {
+      "name": "ILess contributors",
+      "homepage": "https://github.com/mishal/iless/wiki/Contributors"
+    }
+  ],
+  "require": {
+    "mishal/iless": "~2.0",
+    "symfony/process": "~2"
+  },
+  "require-dev": {
+  },
+  "autoload": {
+    "psr-4": {
+      "ILess\\Plugin\\Autoprefix\\": "lib/Autoprefix"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ILess\\Plugin\\Autoprefix\\": "lib/Autoprefix",
+      "ILess\\Test\\Plugin\\Autoprefix\\": "tests/Autoprefix"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.buildpath
+.project
+.settings
+.idea
+.DS_Store?
+ehthumbs.db
+Icon?
+Thumbs.db
+/nbproject
+phpunit.xml
+/vendor
+composer.lock
