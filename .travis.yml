@@ -1,5 +1,7 @@
 language: php
-sudo: false
+before_install:
+  - curl -sL https://deb.nodesource.com/setup_4.x | sudo bash -
+  - sudo apt-get install nodejs
 before_script:
   - composer self-update
   - composer install
