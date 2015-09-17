@@ -1,0 +1,9 @@
+{
+  "name": "Iless-plugin-autoprefix",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "postcss-cli": "~2.1",
+    "autoprefixer": "~6.0"
+  }
+}

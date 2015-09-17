@@ -22,6 +22,11 @@ use Symfony\Component\Process\ProcessBuilder;
 class AutoprefixProcessor extends Configurable implements PostProcessorInterface
 {
     /**
+     * @var string
+     */
+    private $sourceMapRegex = "/(?:\/\/[@#][ \t]+sourceMappingURL=(.+?)[ \t]*$)|(?:\/\*[@#][ \t]+sourceMappingURL=([^\*]+?)[ \t]*(?:\*\/){1}[ \t]*$)/m";
+
+    /**
      * Default options
      *
      * @var array
@@ -52,18 +57,28 @@ class AutoprefixProcessor extends Configurable implements PostProcessorInterface
         $pb->setInput($css);
         $pb->add('--use')->add('autoprefixer');
 
-        $json = $this->prepareJsonConfig();
+        $json = $this->prepareJsonConfig($extra);
         $pb->add('-c')->add($json);
 
-        $process = $pb->getProcess();
+        $sourceMap = null;
+        if ($extra['source_map']) {
+            if (preg_match($this->sourceMapRegex, $css, $matches)) {
+                $sourceMap = $matches[0];
+            }
+        }
 
-        echo $process->getCommandLine() . "\n";
+        $process = $pb->getProcess();
 
         if (0 !== $process->run()) {
             throw new ProcessFailedException($process);
         }
 
         $output = $process->getOutput();
+
+        // preserve source map, until postcss-cli supports source maps
+        if ($sourceMap) {
+            $output .= "\n" . $sourceMap;
+        }
 
         // cleanup
         unlink($json);
@@ -74,16 +89,18 @@ class AutoprefixProcessor extends Configurable implements PostProcessorInterface
     /**
      * @return string
      */
-    private function prepareJsonConfig()
+    private function prepareJsonConfig(array $extra)
     {
         $tmp = tempnam(sys_get_temp_dir(), 'iless_autoprefix');
         $json = $tmp . '.json';
+
         // the cli does not like tmp extension, rename it to json so its happy :)
         rename($tmp, $json);
 
-        file_put_contents($json, json_encode([
-            'autoprefixer' => $this->getOptionsForAutoprefixer()
-        ]));
+        $options = [];
+        $options['autoprefixer'] = $this->getOptionsForAutoprefixer();
+
+        file_put_contents($json, json_encode($options));
 
         return $json;
     }

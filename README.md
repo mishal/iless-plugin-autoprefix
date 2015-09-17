@@ -1,6 +1,6 @@
 # ILess Plugin - Autoprefix
 
-Autoprefixes the generated CSS
+Autoprefixes the generated CSS using PostCSS autoprefixer plugin.
 
 ## Build Status
 
@@ -12,6 +12,10 @@ Install using composer:
 
     $ composer require mishal/iless-plugin-autoprefix
 
+Install requirements
+
+    $ npm install postcss-cli autoprefixer
+
 ## Programmatic Usage
 
     use ILess\Parser;
@@ -19,7 +23,10 @@ Install using composer:
 
     $parser = new Parser();
     // register the plugin
-    $parser->getPluginManager()->addPlugin(new AutoprefixPlugin($directories));
+    $parser->getPluginManager()->addPlugin(new AutoprefixPlugin([
+        // see https://github.com/ai/browserslist
+        'browsers' => ['last 2 versions']
+    ]));
 
     // now I can use schema like directives in my less
     $parser->parseFile('/example.less');
@@ -28,4 +35,19 @@ Install using composer:
 
 ### Less Code – Example.less
 
-    // to do
+    a {
+      display: flex;
+    }
+
+
+### Generated CSS
+
+    a {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+    }
+
+### Known limitations
+
+*Source maps* support is not implemented in `postcss-cli`, see [the issue](https://github.com/code42day/postcss-cli/issues/3)
