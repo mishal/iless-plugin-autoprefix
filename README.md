@@ -34,9 +34,7 @@ Install requirements
         'browsers' => ['last 2 versions']
     ]));
 
-    // now I can use schema like directives in my less
     $parser->parseFile('/example.less');
-
     $css = $parser->getCSS();
 
 ### Less Code – Example.less
@@ -44,7 +42,6 @@ Install requirements
     a {
       display: flex;
     }
-
 
 ### Generated CSS
 
