@@ -1,7 +1,7 @@
 {
   "name": "mishal/iless-plugin-autoprefix",
   "type": "library",
-  "description": "ILess plugin autoprefix",
+  "description": "ILess plugin for autoprefixing CSS",
   "keywords": [
     "less",
     "lesscss",
