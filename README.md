@@ -6,6 +6,12 @@ Autoprefixes the generated CSS using PostCSS autoprefixer plugin.
 
 [![Build Status](https://travis-ci.org/mishal/iless-plugin-autoprefix.svg)](https://travis-ci.org/mishal/iless-plugin-autoprefix)
 
+*Note:* Travis builds are failing because we cannot install new version of node.js before running the tests. See the [issue](https://github.com/travis-ci/travis-ci/issues/2046). 
+
+## Requirements
+
+To use this plugin you need `node.js > 0.12` installed on the machine.
+
 ## Installation
 
 Install using composer:
