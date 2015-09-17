@@ -12,6 +12,8 @@ class AutoprefixPluginTest extends \PHPUnit_Framework_TestCase
     {
         $parser = new Parser($parserOptions, $cache);
 
+        $pluginOptions['postcss_bin'] = POSTCSS_BIN;
+
         $parser->getPluginManager()->addPlugin(new AutoprefixPlugin($pluginOptions));
 
         return $parser;
