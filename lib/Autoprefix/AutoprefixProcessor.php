@@ -32,7 +32,7 @@ class AutoprefixProcessor extends Configurable implements PostProcessorInterface
      * @var array
      */
     protected $defaultOptions = [
-        'postcss_bin' => 'postcss'
+        'postcss_bin' => '/usr/bin/postcss'
     ];
 
     /**
