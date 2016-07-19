@@ -6,8 +6,6 @@ Autoprefixes the generated CSS using PostCSS autoprefixer plugin.
 
 [![Build Status](https://travis-ci.org/mishal/iless-plugin-autoprefix.svg)](https://travis-ci.org/mishal/iless-plugin-autoprefix)
 
-*Note:* Travis builds are failing because we cannot install new version of node.js before running the tests. See the [issue](https://github.com/travis-ci/travis-ci/issues/2046). 
-
 ## Requirements
 
 To use this plugin you need `node.js > 0.12` installed on the machine.
@@ -21,6 +19,8 @@ Install using composer:
 Install requirements
 
     $ npm install postcss-cli autoprefixer
+
+See `package.json` for required versions.
 
 ## Programmatic Usage
 
@@ -46,11 +46,6 @@ Install requirements
 ### Generated CSS
 
     a {
-      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
     }
-
-### Known limitations
-
-*Source maps* support is not implemented in `postcss-cli`, see [the issue](https://github.com/code42day/postcss-cli/issues/3)

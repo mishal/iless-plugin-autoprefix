@@ -21,8 +21,9 @@
     }
   ],
   "require": {
-    "mishal/iless": "~2.0",
-    "symfony/process": "~2"
+    "php": "^5.5 | ^7.0",
+    "mishal/iless": "~2",
+    "symfony/process": "~3"
   },
   "require-dev": {
   },

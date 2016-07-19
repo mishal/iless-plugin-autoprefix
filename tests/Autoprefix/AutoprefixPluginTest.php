@@ -26,8 +26,13 @@ class AutoprefixPluginTest extends \PHPUnit_Framework_TestCase
 
         // FIXME: this is is going to fail in the future, update it!
         $expected = <<< EXPECTED
+section {
+  border-radius: 5px;
+}
+body {
+  color: red;
+}
 a {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -56,41 +61,49 @@ a {
 EXPECTED;
 
         $css = $parser->getCSS();
-
         $this->assertEquals($expected, $css, 'Generated CSS is ok');
     }
 
     public function testSourceMap()
     {
         $tmpMap = tempnam(sys_get_temp_dir(), 'iless_autprefix');
+        rename($tmpMap, $tmpMap = $tmpMap . '.map');
 
         $parser = $this->getParser(null, [
             'remove' => false
         ], [
             'source_map' => true,
             'source_map_options' => [
-                'url' => 'test.map',
+                'base_path' => __DIR__ . '\\_fixtures',
+                'url' => 'foobar.map',
                 'source_contents' => true,
+                'filename' => 'foobar.css',
                 'write_to' => $tmpMap
             ]
         ]);
 
         $parser->parseFile(__DIR__ . '/_fixtures/test.less');
 
+        // FIXME: this is is going to fail in the future, update it!
         $expected = <<< EXPECTED
+section {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+body {
+  color: red;
+}
 a {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
-/*# sourceMappingURL=test.map */
+/*# sourceMappingURL=foobar.map */
 EXPECTED;
 
         $css = $parser->getCSS();
 
-        file_put_contents(__DIR__ . '/test.css', $css);
-
         $this->assertEquals($expected, $css, 'Generated CSS is ok');
+        $this->assertFileExists($tmpMap);
     }
 
 }

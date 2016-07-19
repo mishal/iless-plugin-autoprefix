@@ -1,0 +1,12 @@
+section {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+body {
+  color: red;
+}
+a {
+  display: -ms-flexbox;
+  display: flex;
+}
+/*# sourceMappingURL=foobar.map */
